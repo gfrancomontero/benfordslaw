@@ -9,6 +9,7 @@
 #Benford's Law works each and every single time for randomly chosen numbers, of randomly decided length!
 #Gonzalo Franco
 
+###UNFACTORED CODE
 
 dataset = []
 
@@ -62,3 +63,26 @@ p "#{f} times first digit = 6; equating #{(f * 100) / sum}%"
 p "#{g} times first digit = 7; equating #{(g * 100) / sum}%"
 p "#{h} times first digit = 8; equating #{(h * 100) / sum}%"
 p "#{i} times first digit = 9; equating #{(i * 100) / sum}%"
+
+
+### REFACTORED CODE:
+dataset = []
+
+999.times do
+  random = rand(999)
+  dataset << rand(random)
+end
+
+count = Hash.new(0)
+
+dataset.each do |element|
+  first_digit = element.to_s[0]
+  count[first_digit] += 1
+end
+
+sum = count.values.sum
+
+count.each do |digit, frequency|
+  percentage = (frequency * 100) / sum
+  puts "#{frequency} times first digit = #{digit}; equating #{percentage}%"
+end
